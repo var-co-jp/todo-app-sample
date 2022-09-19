@@ -1,6 +1,7 @@
 from login import create_app
 
-app = create_app()
+
+todo_app = create_app()
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    todo_app.run(debug=True)

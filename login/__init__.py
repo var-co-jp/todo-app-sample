@@ -16,10 +16,15 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'mysite'
     app.config['SQLALCHEMY_DATABASE_URI'] = \
-        'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+      'mysql://{user}:{password}@{host}/{db_name}?charset=utf8'.format(**{
+      'user': "test",
+      'password': "test_pass",
+      'host': "localhost",
+      'db_name': "testdb"
+      })
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    from login.views import bp
-    app.register_blueprint(bp)
+    from login.views import login_bp
+    app.register_blueprint(login_bp)
     db.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
