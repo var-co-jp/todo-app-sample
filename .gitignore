@@ -1,6 +1,7 @@
 # venv環境
 /todo-app
-
+.clear.sh
+*.sqlite
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
