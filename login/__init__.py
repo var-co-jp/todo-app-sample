@@ -1,4 +1,3 @@
-import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -8,7 +7,6 @@ login_manager = LoginManager()
 login_manager.login_view = 'login.login'
 login_manager.login_message = 'ログインして下さい'
 
-basedir = os.path.abspath(os.path.dirname(__name__))
 db = SQLAlchemy()
 migrate = Migrate()
 
@@ -17,10 +15,10 @@ def create_app():
     app.config['SECRET_KEY'] = 'mysite'
     app.config['SQLALCHEMY_DATABASE_URI'] = \
       'mysql://{user}:{password}@{host}/{db_name}?charset=utf8'.format(**{
-      'user': "test",
-      'password': "test_pass",
+      'user': "todo_user",
+      'password': "MySQL_DB_Pass",
       'host': "localhost",
-      'db_name': "testdb"
+      'db_name': "ToDo_DB"
       })
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     from login.views import login_bp
