@@ -2,7 +2,7 @@ from wtforms.form import Form
 from wtforms.fields import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms import ValidationError
-from login.models import User
+from flask_todo.models import User
 
 
 class LoginForm(Form):

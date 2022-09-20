@@ -1,7 +1,7 @@
-from login import create_app
+from flask_todo import create_app
 
 
-todo_app = create_app()
+flask_todo_app = create_app()
 
 if __name__ == '__main__':
-    todo_app.run(debug=True)
+    flask_todo_app.run(debug=True)

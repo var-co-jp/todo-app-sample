@@ -1,15 +1,12 @@
-from login import db, login_manager
+from flask_todo import db, login_manager
 from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
 
-
 class User(UserMixin, db.Model):
-    
     __tablename__ = 'users'
     
     id = db.Column(db.Integer, primary_key=True)
