@@ -1,13 +1,29 @@
 from flask import Blueprint, request, render_template, redirect, url_for
 from flask_login import login_user, login_required, logout_user
 from flask_todo.forms import LoginForm, RegisterForm
-from flask_todo.models import User
+from flask_todo.models import User, Task
+from datetime import datetime
 
 bp = Blueprint('todo_app', __name__, url_prefix='')
 
-@bp.route('/')
+@bp.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template('home.html')
+    if request.method == 'GET':
+        tasks = Task.query.all()
+        return render_template('home.html', tasks=tasks)
+
+    else:
+        title = request.form.get('title')
+        detail = request.form.get('detail')
+        due = request.form.get('due')
+        
+        due = datetime.strptime(due, '%Y-%m-%d')
+        new_task = Task(title=title, detail=detail, due=due)
+
+        db.session.add(new_task)
+        db.session.commit()
+        return redirect('/')
+    # return render_template('home.html')
 
 @bp.route('/welcome')
 @login_required
@@ -51,3 +67,7 @@ def register():
 @login_required
 def user():
     return render_template('user.html')
+
+@bp.route('/create')
+def create():
+    return render_template('create.html')

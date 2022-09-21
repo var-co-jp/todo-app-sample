@@ -31,3 +31,16 @@ class User(UserMixin, db.Model):
     @classmethod
     def select_by_email(cls, email):
         return cls.query.filter_by(email=email).first()
+
+class Task(db.Model):
+    __tablename__ = 'tasks'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(30), nullable=False)
+    detail = db.Column(db.String(100))
+    due = db.Column(db.DateTime, nullable=False)
+    
+    def __init__(self, title, detail, due):
+        self.title = title
+        self.detail = detail
+        self.due = due

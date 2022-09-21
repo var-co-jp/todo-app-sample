@@ -23,4 +23,4 @@ class RegisterForm(Form):
     def validate_email(self, field):
         if User.select_by_email(field.data):
             raise ValidationError('メールアドレスは既に登録されています')
-        
+
