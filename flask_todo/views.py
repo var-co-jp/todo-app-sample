@@ -13,11 +13,13 @@ def home():
         return render_template('home.html', tasks=tasks)
 
     else:
-        title = request.form.get('title')
-        detail = request.form.get('detail')
-        due = request.form.get('due')
+        form = TaskF(request.form)
+        task = Task(
+            title = form.title.data, 
+            detail = form.detail.data,
+            due = form.due.data
+            )
         
-        due = datetime.strptime(due, '%Y-%m-%d')
         new_task = Task(title=title, detail=detail, due=due)
 
         db.session.add(new_task)

@@ -1,5 +1,5 @@
 from wtforms.form import Form
-from wtforms.fields import StringField, PasswordField, SubmitField
+from wtforms.fields import StringField, PasswordField, SubmitField, DateField
 from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms import ValidationError
 from flask_todo.models import User
@@ -24,3 +24,7 @@ class RegisterForm(Form):
         if User.select_by_email(field.data):
             raise ValidationError('メールアドレスは既に登録されています')
 
+class TaskForm(Form):
+    title = StringField('タイトル： ', validators=[DataRequired()])
+    detail = StringField('名前： ', validators=[DataRequired()])
+    due = DateField('期限： ', validators=[DataRequired()])
