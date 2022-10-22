@@ -1,5 +1,7 @@
 # venv環境
 /todo-app
+/flask_venv
+
 .clear.sh
 *.sqlite
 # Byte-compiled / optimized / DLL files
