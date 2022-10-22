@@ -1,4 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>ユーザー画面</h1>
+    
+    <div>
+        <form action="/create_task" method="GET">
+            <input type="submit" value="新規作成">
+        </form>
+    </div>
+    
+    {% for task in tasks %}
+        <h2>タイトル：{{ task.title }}</h2>
+        <p>期限：{{ task.due.date() }}</p>
+        <a href="/detail/{{ task.id }}" role="button">詳細</a>
+        <a href="/update/{{ task.id }}" role="button">更新</a>
+        <a href="/delete/{{ task.id }}" role="button">削除</a>
+    {% endfor %}
 {% endblock content %}

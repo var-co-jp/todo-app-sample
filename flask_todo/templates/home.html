@@ -1,18 +1,11 @@
-{% from "_formhelpers.html" import render_field %}
 {% extends 'base.html' %}
+
 {% block content %}
     <div>
         {% if current_user.is_authenticated %}
-            <p>Hello {{ current_user.username }}</p>
-            <form method="POST">
-                {{form.csrf_token}}
-                {{render_field(form.username)}}
-                {{render_field(form.email)}}
-                {{render_field(form.password)}}
-                {{form.submit()}}
-            </form>
+        <p>Hello {{ current_user.username }}</p>
         {% else %}
-            <p>ログイン or 登録をして下さい</p>
+        <p>ログイン or 登録をして下さい</p>
         {% endif %}
     </div>
 {% endblock content %}

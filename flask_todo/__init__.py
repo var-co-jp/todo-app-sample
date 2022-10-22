@@ -10,6 +10,7 @@ login_manager.login_message = 'ログインして下さい'
 db = SQLAlchemy()
 migrate = Migrate()
 
+
 def create_app():
     app = Flask(__name__)
     

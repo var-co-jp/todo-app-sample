@@ -7,8 +7,10 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 class User(UserMixin, db.Model):
+    # テーブル名
     __tablename__ = 'users'
     
+    # カラム定義
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64), index=True)
@@ -23,24 +25,64 @@ class User(UserMixin, db.Model):
     def validate_password(self, password):
         return check_password_hash(self.password, password)
     
-    def add_user(self):
-        with db.session.begin(subtransactions=True):
-            db.session.add(self)
-        db.session.commit()
-    
+    def add_user_db(self):
+        try:
+            with db.session.begin(subtransactions=True):
+                db.session.add(self)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            raise
+        finally:
+            db.session.close()
+            
     @classmethod
     def select_by_email(cls, email):
         return cls.query.filter_by(email=email).first()
 
+
 class Task(db.Model):
+    # テーブル名
     __tablename__ = 'tasks'
 
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(30), nullable=False)
-    detail = db.Column(db.String(100))
+    # カラム定義
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    title = db.Column(db.String(64), index=True, nullable=False)
     due = db.Column(db.DateTime, nullable=False)
-    
-    def __init__(self, title, detail, due):
+    detail = db.Column(db.String(128), index=True)
+
+    def __init__(self, title, due, detail):
         self.title = title
-        self.detail = detail
         self.due = due
+        self.detail = detail
+    
+    def add_task_db(self):
+        try:
+            with db.session.begin(subtransactions=True):
+                db.session.add(self)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            raise
+        finally:
+            db.session.close()
+            
+    def edit_task_db(self):
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+            raise
+        finally:
+            db.session.close()
+            
+    def delete_task_db(self):
+        try:
+            with db.session.begin(subtransactions=True):
+                db.session.delete(self)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            raise
+        finally:
+            db.session.close()
