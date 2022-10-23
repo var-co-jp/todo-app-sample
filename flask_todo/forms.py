@@ -1,11 +1,12 @@
 from wtforms.form import Form
-from wtforms.fields import StringField, PasswordField, SubmitField, TextAreaField, DateField
+from wtforms.fields import StringField, PasswordField, SubmitField, TextAreaField, DateField, HiddenField
 from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms import ValidationError
 from flask_todo.models import User, Task
 
 
 class LoginForm(Form):
+    get_user_id = HiddenField()
     email = StringField('メール: ', validators=[DataRequired(), Email()])
     password = PasswordField('パスワード: ', validators=[DataRequired()])
     submit = SubmitField('ログイン')

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from flask_todo.forms import LoginForm, RegisterForm, TaskForm
 from flask_todo.models import User, Task
 from datetime import datetime
@@ -50,7 +50,24 @@ def register():
             username = form.username.data,
             password = form.password.data
         )
-        user.add_user_db()
+        # user.add_user_db()
+        
+        # user.email = form.email.data
+        # user.username = form.username.data
+        # user.password = form.password.data
+        
+        try:
+            with db.session.begin(subtransactions=True):
+                db.session.add(user)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            raise
+        finally:
+            db.session.close()
+        
+        # user.add_user_db()
+        
         return redirect(url_for('todo_app.login'))
     return render_template('register.html', form=form)
 
@@ -61,7 +78,7 @@ def register():
 def user():
     form = TaskForm(request.form)
     if request.method == 'GET':
-        tasks = Task.query.order_by(Task.due).all()
+        tasks = Task.query.filter(Task.user_id == current_user.get_id()).order_by(Task.due).all()
     return render_template('user.html',tasks=tasks)
         
 
@@ -70,18 +87,33 @@ def user():
 @login_required
 def create_task():
     form = TaskForm(request.form)
+    # get_user_id = LoginForm(request.form)
+    
     if request.method == 'POST' and form.validate():
-        title = form.title.data
-        detail = form.detail.data
-        due = form.due.data
+        
         
         create_task = Task(
-            title = title,
-            detail = detail,
-            due = due
+            title = form.title.data,
+            detail = form.detail.data,
+            due = form.due.data,
+            user_id = current_user.get_id()
+            # title = title,
+            # detail = detail,
+            # due = due,
+            # user_id = user_id
             )
         
-        create_task.add_task_db()        
+        try:
+            with db.session.begin(subtransactions=True):
+                db.session.add(create_task)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            raise
+        finally:
+            db.session.close()
+        
+        # create_task.add_task_db()        
         return redirect(url_for('todo_app.user'))
     return render_template('create_task.html', form=form)
 
@@ -99,7 +131,16 @@ def detail_task(id):
 @login_required
 def delete_task(id):
     task = Task.query.get(id)
-    task.delete_task_db()
+    # task.delete_task_db()
+    try:
+        with db.session.begin(subtransactions=True):
+            db.session.delete(task)
+        db.session.commit()
+    except:
+        db.session.rollback()
+        raise
+    finally:
+        db.session.close()
     return redirect(url_for('todo_app.user'))
 
 
@@ -120,7 +161,14 @@ def update_task(id):
             due = task.due,
             detail = task.detail
             )
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+            raise
+        finally:
+            db.session.close()
         
-        update_task.edit_task_db()
+        # update_task.edit_task_db()
         return redirect(url_for('todo_app.user'))
     
