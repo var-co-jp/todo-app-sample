@@ -50,11 +50,6 @@ def register():
             username = form.username.data,
             password = form.password.data
         )
-        # user.add_user_db()
-        
-        # user.email = form.email.data
-        # user.username = form.username.data
-        # user.password = form.password.data
         
         try:
             with db.session.begin(subtransactions=True):
@@ -65,8 +60,6 @@ def register():
             raise
         finally:
             db.session.close()
-        
-        # user.add_user_db()
         
         return redirect(url_for('todo_app.login'))
     return render_template('register.html', form=form)
@@ -87,20 +80,13 @@ def user():
 @login_required
 def create_task():
     form = TaskForm(request.form)
-    # get_user_id = LoginForm(request.form)
-    
-    if request.method == 'POST' and form.validate():
-        
+    if request.method == 'POST' and form.validate():        
         
         create_task = Task(
             title = form.title.data,
             detail = form.detail.data,
             due = form.due.data,
             user_id = current_user.get_id()
-            # title = title,
-            # detail = detail,
-            # due = due,
-            # user_id = user_id
             )
         
         try:
@@ -112,8 +98,7 @@ def create_task():
             raise
         finally:
             db.session.close()
-        
-        # create_task.add_task_db()        
+               
         return redirect(url_for('todo_app.user'))
     return render_template('create_task.html', form=form)
 
@@ -131,7 +116,7 @@ def detail_task(id):
 @login_required
 def delete_task(id):
     task = Task.query.get(id)
-    # task.delete_task_db()
+    
     try:
         with db.session.begin(subtransactions=True):
             db.session.delete(task)
@@ -141,6 +126,7 @@ def delete_task(id):
         raise
     finally:
         db.session.close()
+        
     return redirect(url_for('todo_app.user'))
 
 
@@ -152,8 +138,8 @@ def update_task(id):
     if request.method == 'GET':
         return render_template('update.html', task=task)
     else:
-        task.title = request.form.get('title'),
-        task.due = datetime.strptime(request.form.get('due'), '%Y-%m-%d'),
+        task.title = request.form.get('title')
+        task.due = datetime.strptime(request.form.get('due'), '%Y-%m-%d')
         task.detail = request.form.get('detail')
         
         update_task = Task(
@@ -161,6 +147,7 @@ def update_task(id):
             due = task.due,
             detail = task.detail
             )
+        
         try:
             db.session.commit()
         except:
@@ -169,6 +156,5 @@ def update_task(id):
         finally:
             db.session.close()
         
-        # update_task.edit_task_db()
         return redirect(url_for('todo_app.user'))
     
