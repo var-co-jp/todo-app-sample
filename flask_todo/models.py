@@ -18,7 +18,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(128))
     created_at = db.Column(db.DateTime, server_default=func.now(), nullable=False)
     update_at = db.Column(db.DateTime, nullable=True)
-    last_access = db.Column(db.DateTime, nullable=True)
+    last_access = db.Column(db.DateTime, onupdate=func.now(), nullable=True)
     
     
     tasks = db.relationship("Task", backref="users")

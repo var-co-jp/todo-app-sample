@@ -38,7 +38,7 @@ def login():
             if not next:
                 next = url_for('todo_app.welcome')
             return redirect(next)
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, last_access=datetime.now())
 
 
 @bp.route('/register', methods=['GET', 'POST'])
@@ -148,12 +148,6 @@ def update_task(id):
             end_time = task.end_time,
             detail = task.detail
             )
-        
-        # update_task = Task(
-        #     title = form.title.data,
-        #     detail = form.detail.data,
-        #     end_time = form.end_time.data
-        # )
         
         try:
             db.session.commit()

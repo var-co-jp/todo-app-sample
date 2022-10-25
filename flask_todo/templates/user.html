@@ -19,7 +19,7 @@
             <p>期限：{{ task.end_time.date() }}</p>
             <a class="btn btn-secondary btn-sm" href="/detail/{{ task.id }}" role="button">詳細</a>
             <a class="btn btn-success btn-sm" href="/update/{{ task.id }}" role="button">編集</a>
-            <a class="btn btn-danger btn-sm" href="/delete/{{ task.id }}" role="button">削除</a>
+            <a class="btn btn-danger btn-sm" href="/delete/{{ task.id }}" role="button">完了</a>
         </div>
     </div>
     {% endfor %}
