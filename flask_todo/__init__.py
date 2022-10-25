@@ -1,11 +1,13 @@
+from flask_bootstrap import Bootstrap5
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 
+
 login_manager = LoginManager()
 login_manager.login_view = 'todo_app.login'
-login_manager.login_message = 'ログインして下さい'
+login_manager.login_message = 'ログイン未完了です'
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -24,6 +26,7 @@ def create_app():
       })
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
+    bootstrap = Bootstrap5(app)
     
     from flask_todo.views import bp
     

@@ -2,7 +2,7 @@ from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_todo.forms import LoginForm, RegisterForm, TaskForm
 from flask_todo.models import User, Task
-from datetime import datetime
+from datetime import datetime, date
 from flask_todo import db
 
 bp = Blueprint('todo_app', __name__, url_prefix='')
@@ -49,7 +49,7 @@ def register():
             email = form.email.data,
             username = form.username.data,
             password = form.password.data
-        )
+            )
         
         try:
             with db.session.begin(subtransactions=True):
@@ -71,8 +71,8 @@ def register():
 def user():
     form = TaskForm(request.form)
     if request.method == 'GET':
-        tasks = Task.query.filter(Task.user_id == current_user.get_id()).order_by(Task.due).all()
-    return render_template('user.html',tasks=tasks)
+        tasks = Task.query.filter(Task.user_id == current_user.get_id()).order_by(Task.end_time).all()
+    return render_template('user.html',tasks=tasks, today=date.today())
         
 
 # 新規作成ページ
@@ -85,7 +85,7 @@ def create_task():
         create_task = Task(
             title = form.title.data,
             detail = form.detail.data,
-            due = form.due.data,
+            end_time = form.end_time.data,
             user_id = current_user.get_id()
             )
         
@@ -108,7 +108,7 @@ def create_task():
 @login_required
 def detail_task(id):
     task = Task.query.get(id)
-    return render_template('detail.html', task=task)
+    return render_template('detail.html', task=task, today=date.today())
 
 
 # 削除ページ
@@ -135,18 +135,25 @@ def delete_task(id):
 @login_required
 def update_task(id):
     task = Task.query.get(id)
+    form = TaskForm(request.form)
     if request.method == 'GET':
-        return render_template('update.html', task=task)
+        return render_template('update.html', form=form , task=task, today=date.today())
     else:
         task.title = request.form.get('title')
-        task.due = datetime.strptime(request.form.get('due'), '%Y-%m-%d')
+        task.end_time = datetime.strptime(request.form.get('end_time'), '%Y-%m-%d')
         task.detail = request.form.get('detail')
         
         update_task = Task(
             title = task.title,
-            due = task.due,
+            end_time = task.end_time,
             detail = task.detail
             )
+        
+        # update_task = Task(
+        #     title = form.title.data,
+        #     detail = form.detail.data,
+        #     end_time = form.end_time.data
+        # )
         
         try:
             db.session.commit()

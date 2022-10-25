@@ -1,14 +1,27 @@
 {% from "_formhelpers.html" import render_field %}
 {% extends 'base.html' %}
 
+{% block title %}ユーザー情報登録画面{% endblock %}
+
 {% block content %}
-<h1>ユーザー情報登録画面</h1>
+{% for message in get_flashed_messages() %}
+    {{ message }}
+{% endfor %}
 <form method="POST">
     {{form.csrf_token}}
-    {{render_field(form.username)}}
-    {{render_field(form.email)}}
-    {{render_field(form.password)}}
-    {{render_field(form.password_confirm)}}
-    {{form.submit()}}
+    <div class="container">
+        <p>
+            <div class="card border-primary w-50 mb-3" style="margin: auto;">
+                <div class="card-header border-primary">ユーザー情報登録</div>
+                <div class="card-body border-primary">
+                    <p class="card-title border-primary">{{render_field(form.username)}}</p>
+                    <p>{{render_field(form.email)}}</p>
+                    <p>{{render_field(form.password)}}</p>
+                    <p>{{render_field(form.password_confirm)}}</p>
+                    <p>{{form.submit()}}</p>
+                </div>
+            </div>
+        </p>
+    </div> 
 </form>
 {% endblock content %}

@@ -1,6 +1,7 @@
 from flask_todo import db, login_manager
 from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from sqlalchemy.sql import func
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -15,6 +16,10 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64), index=True)
     password = db.Column(db.String(128))
+    created_at = db.Column(db.DateTime, server_default=func.now(), nullable=False)
+    update_at = db.Column(db.DateTime, nullable=True)
+    last_access = db.Column(db.DateTime, nullable=True)
+    
     
     tasks = db.relationship("Task", backref="users")
     
@@ -39,7 +44,9 @@ class Task(db.Model):
     # カラム定義
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     title = db.Column(db.String(64), index=True, nullable=False)
-    due = db.Column(db.DateTime, nullable=False)
     detail = db.Column(db.String(128), index=True)
+    end_time = db.Column(db.DateTime, nullable=False)
+    created_at = db.Column(db.DateTime, server_default=func.now(), nullable=False)
+    update_at = db.Column(db.DateTime, onupdate=func.utc_timestamp(), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     

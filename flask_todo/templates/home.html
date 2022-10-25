@@ -1,11 +1,33 @@
+{% from "_formhelpers.html" import render_field %}
 {% extends 'base.html' %}
 
+{% block title %}ホーム画面{% endblock %}
+
 {% block content %}
+<div class="container">
     <div>
         {% if current_user.is_authenticated %}
-        <p>Hello {{ current_user.username }}</p>
+        <p>
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-7">
+                    <h2 class="text-success">{{ current_user.username }}さん、こんにちは</h2>
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+        </p>
         {% else %}
-        <p>ログイン or 登録をして下さい</p>
+        <p>
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-7">
+                    <h2 class="text-danger">ログイン or 登録をして下さい</h2>
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+        </p>
         {% endif %}
     </div>
+    
+</div>
 {% endblock content %}

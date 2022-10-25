@@ -1,12 +1,25 @@
 {% from "_formhelpers.html" import render_field %}
 {% extends 'base.html' %}
 
+{% block title %}タスク入力画面{% endblock %}
+
+
 {% block content %}
-    <h1>タスク作成</h1>
-    <form method="POST">
-        {{render_field(form.title)}}
-        {{render_field(form.due)}}
-        {{render_field(form.detail)}}
-        {{form.submit()}}
-    </form>
+<form method="POST">
+    <div class="container">
+        <p>
+
+            <div class="card border-primary w-50 mb-3" style="margin: auto;">
+                <div class="card-header border-primary">タスクを入力してください</div>
+                <div class="card-body border-primary">
+                    <p class="card-title border-primary">{{render_field(form.title)}}</p>
+                    <p>{{render_field(form.detail)}}</p>
+                    <p>{{render_field(form.end_time)}}</p>
+                    <p>{{form.submit()}}</p>
+                </div>
+            </div>
+        </p>
+    </div>
+</form>
 {% endblock content %}
+    

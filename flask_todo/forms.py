@@ -1,7 +1,9 @@
+from flask_wtf import FlaskForm
 from wtforms.form import Form
 from wtforms.fields import StringField, PasswordField, SubmitField, TextAreaField, DateField
 from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms import ValidationError
+
 from flask_todo.models import User, Task
 
 
@@ -26,7 +28,7 @@ class RegisterForm(Form):
         
         
 class TaskForm(Form):
-    title = StringField('タイトル： ', validators=[DataRequired()])
-    due = DateField('日付:', validators=[DataRequired()], format='%Y-%m-%d')
-    detail = TextAreaField('詳細： ', validators=[DataRequired()])
+    title = StringField('タイトル', validators=[DataRequired()])
+    detail = TextAreaField('詳細', validators=[DataRequired()])
+    end_time = DateField('日付', validators=[DataRequired()], format='%Y-%m-%d')
     submit = SubmitField('登録')

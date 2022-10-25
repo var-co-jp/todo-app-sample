@@ -1,18 +1,28 @@
+{% from "_formhelpers.html" import render_field %}
 {% extends 'base.html' %}
+
+{% block title %}タスク一覧画面{% endblock %}
+
+
 {% block content %}
-    <h1>ユーザー画面</h1>
-    
-    <div>
-        <form action="/create_task" method="GET">
-            <input type="submit" value="新規作成">
-        </form>
-    </div>
-    
+<div class="container">
+    <a class="btn btn-info btn-lg m-5" href="/create_task" role="button">新規作成</a>
     {% for task in tasks %}
-        <h2>タイトル：{{ task.title }}</h2>
-        <p>期限：{{ task.due.date() }}</p>
-        <a href="/detail/{{ task.id }}" role="button">詳細</a>
-        <a href="/update/{{ task.id }}" role="button">更新</a>
-        <a href="/delete/{{ task.id }}" role="button">削除</a>
+    <div class="card w-50 mb-3" style="margin: auto;">
+        <div class="card-body border-primary">
+            {% if task.end_time.date() < today %}
+            <div class="alert alert-warning" role="alert">
+                期限切れです！
+            </div>
+            {% endif %}
+            <h2 class="card-title">{{ task.title }}</h2>
+            <p>期限：{{ task.end_time.date() }}</p>
+            <a class="btn btn-secondary btn-sm" href="/detail/{{ task.id }}" role="button">詳細</a>
+            <a class="btn btn-success btn-sm" href="/update/{{ task.id }}" role="button">編集</a>
+            <a class="btn btn-danger btn-sm" href="/delete/{{ task.id }}" role="button">削除</a>
+        </div>
+    </div>
     {% endfor %}
+</div>
+
 {% endblock content %}
