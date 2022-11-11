@@ -4,23 +4,24 @@
 {% block title %}ログイン画面{% endblock %}
 
 {% block content %}
-{% for message in get_flashed_messages() %}
-    {{ message }}
-{% endfor %}
-<form method="POST">
-    {{form.csrf_token}}
-    <div class="container">
-        <p>
-            <div class="card border-primary w-50 mb-3" style="margin: auto;">
-                <div class="card-header border-primary">ログインしてください</div>
-                <div class="card-body border-primary">
-                    <p class="card-title border-primary">{{render_field(form.email)}}</p>
-                    <p>{{render_field(form.password)}}</p>
-                    <p>{{form.submit()}}</p>
-                </div>
-            </div>
-        </p>
-    </div>    
-</form>
+<main>
+    <h2 class="authentication-title">ログインして下さい</h2>
+    <form method="POST">
+        <input type="text" placeholder="Email" name="email">
+        <input type="password" placeholder="Password" name="password">
+        <div class="single-button-container">
+            <button class="blue-button">ログイン</button>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+    </form>
+</main>    
 {% endblock content %}
     

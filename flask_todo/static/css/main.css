@@ -1,0 +1,103 @@
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 35%;
+    gap: 14px;
+}
+
+.input-container {
+    width: 100%;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    outline: solid 1px var(--gray);
+    border: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.button-container > button {
+    width: 47%;
+    padding: 10px;
+}
+
+.single-button-container {
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.single-button-container > button {
+    width: 100%;
+    padding: 10px;
+}
+
+.outline-button {
+    border: solid 1px var(--blue);
+    color: var(--blue);
+    display: block;
+}
+
+
+.outline-button > a {
+    color: var(--blue);
+}
+
+/* Registration */
+.authentication-title {
+    margin-bottom: 1rem;
+}
+
+.start-message {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.start-login-button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.start-login-button-container > button {
+    width: 20%;
+    padding: 10px;
+}
+
+.start-login-button {
+    border: solid 1px var(--blue);
+    color: var(--blue);
+    display: block;
+    background-color: var(--blue);
+}
+
+.start-login-button > a {
+    color: var(--white);
+}
+
+@media screen and (max-width: 960px) {
+    form {
+        width: 50%;
+    }
+}
+
+.flashes {
+    color: var(--red);
+}

@@ -4,27 +4,29 @@
 {% block title %}タスク詳細画面{% endblock %}
 
 {% block content %}
-<div class="container">
-    <form method="GET">
-        <a class="btn btn-info btn-lg m-5" href="/user" role="button">戻る</a>
-        <div class="card w-50 mb-3" style="margin: auto;">
-            <div class="card-body">
-                {% if task.end_time.date() < today %}
-                <div class="alert alert-warning" role="alert">
-                    期限切れです！
-                </div>
-                {% endif %}
-                <h2 class="card-title text-success">
-                    {{ task.title }}
-                </h2><hr>
-                <p>
-                    {{ task.detail }}
-                </p><hr>
-                <p>
-                    期限：{{ task.end_time.date() }}
-                </p>
-            </div>
+<main>
+    <div class="task-detail-container">
+        <h2 class="task-detail-title">
+            {{ task.title }}
+        </h2>
+        <p>
+            {{ task.detail }}
+        </p>
+        <div class="task-detail-expiry">
+            <p>
+                期限：{{ task.end_time.date() }}
+            </p>
+            {% if task.end_time.date() < today %}
+            <button class="orange-button expired-button">
+                期限切れです！
+            </button>
+            {% endif %}
         </div>
-    </form>
-</div>
+        <div class="single-button-container">
+            <button class="blue-button">
+                <a href="/user">戻る</a>
+            </button>
+        </div>
+    </div>
+</main>
 {% endblock content %}

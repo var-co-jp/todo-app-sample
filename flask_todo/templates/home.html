@@ -4,30 +4,27 @@
 {% block title %}ホーム画面{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div>
+<main>
+    <div class="container">
+        <!-- ログインが成功している場合 -->
         {% if current_user.is_authenticated %}
-        <p>
-            <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-7">
-                    <h2 class="text-success">{{ current_user.username }}さん、こんにちは</h2>
-                </div>
-                <div class="col-sm-4"></div>
-            </div>
-        </p>
+        <h2 class="start-message">
+            ようこそ！{{ current_user.username }}さん
+        </h2>
+        <!-- ログインしていない場合 -->
         {% else %}
-        <p>
-            <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-7">
-                    <h2 class="text-danger">ログイン or 登録をして下さい</h2>
-                </div>
-                <div class="col-sm-4"></div>
-            </div>
-        </p>
+        <h2 class="start-message">
+            ログイン or 登録をして下さい
+        </h2>
+        <form class="start-login-button-container">
+            <button class="start-login-button">
+                <a href="{{ url_for('todo_app.login') }}">ログイン</a>
+            </button>
+            <button class="start-login-button">
+                <a href="{{ url_for('todo_app.register') }}">登録</a>
+            </button>
+        </form>
         {% endif %}
     </div>
-    
-</div>
+</main>
 {% endblock content %}

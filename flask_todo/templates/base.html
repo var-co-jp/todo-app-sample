@@ -10,39 +10,30 @@
             {% block title %}
             {% endblock title %}
         </title>
-        {% block styles %}
-            <!-- Bootstrap CSS -->
-            {{ bootstrap.load_css() }}
-        {% endblock styles %}
-    {% endblock head %}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{url_for('static',filename='css/reset.css')}}">
+        <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}">
+        {% endblock head %}
         
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-info bg-info">
-        <div class="container-fluid">
-            <a class="navbar-brand text-success" href="{{url_for('todo_app.home')}}">ホーム</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse show" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    {% if current_user.is_authenticated %}
-                    <a class="nav-link active text-danger" aria-current="page" href="{{ url_for('todo_app.logout') }}">ログアウト</a>
-                    {% else %}
-                    <a class="nav-link text-danger" href="{{ url_for('todo_app.login') }}">ログイン</a>
-                    <a class="nav-link text-danger" href="{{ url_for('todo_app.register') }}">登録</a>
-                    {% endif %}
-                    <a class="nav-link" href="{{ url_for('todo_app.user') }}">ユーザー画面</a>
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
-                </div>
-            </div>
+    <div class="wrapper">
+        <div id="header">
+            <ul id="nav">
+                <li><a class="nav-links" href="{{url_for('todo_app.home')}}">ホーム</a></li>
+                {% if current_user.is_authenticated %}
+                <li><a class="nav-links" aria-current="page" href="{{ url_for('todo_app.logout') }}">ログアウト</a></li>
+                {% else %}
+                <!-- <li><a class="nav-links" href="{{ url_for('todo_app.login') }}">ログイン</a></li>
+                <li><a class="nav-links" href="{{ url_for('todo_app.register') }}">登録</a></li> -->
+                {% endif %}
+                <li><a class="nav-links" href="{{ url_for('todo_app.user') }}">ユーザー画面</a></li>
+            </ul>
         </div>
-    </nav>
-    {% block content %}
-    {% endblock content %}
-    {% block scripts %}
-        <!-- Optional JavaScript -->
-        {{ bootstrap.load_js() }}
-    {% endblock scripts%}
-</body>
+        {% block content %}
+        {% endblock content %}
+    </div>
+    </body>
 </html>

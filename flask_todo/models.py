@@ -7,6 +7,8 @@ from sqlalchemy.sql import func
 def load_user(user_id):
     return User.query.get(user_id)
 
+
+# Userテーブルの定義
 class User(UserMixin, db.Model):
     # テーブル名
     __tablename__ = 'users'
@@ -20,9 +22,7 @@ class User(UserMixin, db.Model):
     update_at = db.Column(db.DateTime, nullable=True)
     last_access = db.Column(db.DateTime, onupdate=func.now(), nullable=True)
     
-    
     tasks = db.relationship("Task", backref="users")
-    
     
     def __init__(self, email, username, password):
         self.email = email
@@ -37,6 +37,7 @@ class User(UserMixin, db.Model):
         return cls.query.filter_by(email=email).first()
 
 
+# Taskテーブルの定義
 class Task(db.Model):
     # テーブル名
     __tablename__ = 'tasks'
@@ -49,4 +50,3 @@ class Task(db.Model):
     created_at = db.Column(db.DateTime, server_default=func.now(), nullable=False)
     update_at = db.Column(db.DateTime, onupdate=func.utc_timestamp(), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    

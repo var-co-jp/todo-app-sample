@@ -4,33 +4,30 @@
 {% block title %}タスク更新画面{% endblock %}
 
 {% block content %}
-<div class="container">
-    <form class="m-5" action="/update/{{ task.id }}" method="POST">
-        <button type="submit" class="btn btn-primary">更新</button>
-        <a class="btn btn-outline-primary" href="/user" role="button">戻る</a>
-        <div class="card w-50 mb-3" style="margin: auto;">
-            <div class="card-body">
-                {% if task.end_time.date() < today %}
-                <div class="alert alert-warning" role="alert">
-                    期限切れです！
-                </div>
-                {% endif %}
-                <div class="form-group pb-3">
-                    <h2 class="card-title">
-                        <label for="title">タイトル : </label>
-                        <input type="text" class="form-control" name="title" aria-describedby="title-help" value={{ task.title }}>
-                    </h2>
-                </div>
-                <div class="form-group pb-3">
-                    <label for="detail">詳細 : </label>
-                    <input type="text" class="form-control" name="detail" value={{ task.detail }}>
-                </div>
-                <div class="form-group pb-3">
-                    <label for="due">日付 : </label>
-                    <input type="date" name="end_time" value={{ task.end_time.date() }} required>
-                </div>
-            </div>
+<main>
+    {% if task.end_time.date() < today %}
+        <div class="">
+            期限切れです！
+        </div>
+    {% endif %}
+    <form action="/update/{{ task.id }}" method="POST">
+        <div class="input-container">
+            <label for="title">タイトル</label>
+            <input type="text" name="title" aria-describedby="title-help" value={{ task.title }}>
+        </div>
+        <div class="input-container">
+            <label for="detail">詳細</label>
+            <!-- <input type="text" name="detail" value={{ task.detail }}> -->
+            <textarea name="detail" id="" rows="5">{{ task.detail }}</textarea>
+        </div>
+        <div class="input-container">
+            <label for="due">日付</label>
+            <input type="date" name="end_time" value={{ task.end_time.date() }} required>
+        </div>
+        <div class="button-container">
+            <button type="submit" class="green-button">更新</button>
+            <button class="outline-button"><a href="/user" role="button">戻る</a></button>
         </div>
     </form>
-</div>
+</main>
 {% endblock content %}

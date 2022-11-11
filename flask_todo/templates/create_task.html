@@ -5,21 +5,23 @@
 
 
 {% block content %}
-<form method="POST">
-    <div class="container">
-        <p>
-
-            <div class="card border-primary w-50 mb-3" style="margin: auto;">
-                <div class="card-header border-primary">タスクを入力してください</div>
-                <div class="card-body border-primary">
-                    <p class="card-title border-primary">{{render_field(form.title)}}</p>
-                    <p>{{render_field(form.detail)}}</p>
-                    <p>{{render_field(form.end_time)}}</p>
-                    <p>{{form.submit()}}</p>
-                </div>
-            </div>
-        </p>
-    </div>
-</form>
+<main>
+    <form method="POST">
+        <div class="input-container">
+            <input type="text" placeholder="タスクのタイトル" name="title">
+        </div>
+        <div class="input-container">
+            <textarea name="detail" placeholder="タスクの詳細" id="" rows="5"></textarea>
+        </div>
+        <div class="input-container">
+            <label for="due">終了予定日</label>
+            <input type="date" name="end_time" required>
+        </div>
+        <div class="button-container">
+            <button type="submit" class="green-button">作成</button>
+            <button class="outline-button"><a href="/user" role="button">戻る</a></button>
+        </div>
+    </form>
+</main>
 {% endblock content %}
     

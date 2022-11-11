@@ -1,0 +1,82 @@
+.container {
+    width: 100%;
+    margin: 0 auto;
+    
+}
+
+.task-add-button-container {
+    position: fixed;
+    top: 58px;
+    left: 0;
+    right: 0;
+    background-color: white;
+
+}
+
+.task-add-button {
+    display: block;
+    /* text-decoration: none; */
+    padding: 0.5rem;
+    width: 300px;
+    margin: 0.5rem;
+    
+}
+
+.tasks-wrapper {
+    width: 70%;
+    margin: 170px auto;
+
+}
+
+.task-container {
+    display: flex;
+    padding: 1rem;
+    justify-content: space-between;
+    border-bottom: solid 2px var(--gray);
+}
+
+.task-detail {
+    max-width: 65%;
+}
+
+.task-title {
+    overflow-wrap: break-word;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.expired-button {
+    margin: 0.5rem 0 0 0;
+    padding: 0.3rem 0.6rem;
+}
+
+.task-edit-buttons-container {
+    display: flex;
+    gap: 0.3rem;
+    align-items: flex-start;
+}
+
+.task-edit-buttons-container > button {
+    padding: 0.3rem 0.6rem;
+}
+
+.task-detail-container {
+    width: 35%;
+
+}
+
+.task-detail-container > p {
+    line-height: 2;
+}
+
+.task-detail-title {
+    overflow-wrap: break-word;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.task-detail-expiry {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}

@@ -4,24 +4,25 @@
 {% block title %}ユーザー情報登録画面{% endblock %}
 
 {% block content %}
-{% for message in get_flashed_messages() %}
-    {{ message }}
-{% endfor %}
-<form method="POST">
-    {{form.csrf_token}}
-    <div class="container">
-        <p>
-            <div class="card border-primary w-50 mb-3" style="margin: auto;">
-                <div class="card-header border-primary">ユーザー情報登録</div>
-                <div class="card-body border-primary">
-                    <p class="card-title border-primary">{{render_field(form.username)}}</p>
-                    <p>{{render_field(form.email)}}</p>
-                    <p>{{render_field(form.password)}}</p>
-                    <p>{{render_field(form.password_confirm)}}</p>
-                    <p>{{form.submit()}}</p>
-                </div>
-            </div>
-        </p>
-    </div> 
-</form>
+<main>
+    <h2 class="authentication-title">登録して下さい</h2>
+    <form method="post">
+        <input type="text" placeholder="Name" name="name">
+        <input type="text" placeholder="Email" name="email">
+        <input type="password" placeholder="Password" name="password1">
+        <input type="password" placeholder="Password Confirmation" name="password2">
+        <div class="single-button-container">
+            <button class="blue-button">登録</button>
+        </div>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for message in messages %}
+              <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </form>
+</main>
 {% endblock content %}

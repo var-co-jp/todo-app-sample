@@ -3,26 +3,35 @@
 
 {% block title %}タスク一覧画面{% endblock %}
 
-
 {% block content %}
-<div class="container">
-    <a class="btn btn-info btn-lg m-5" href="/create_task" role="button">新規作成</a>
-    {% for task in tasks %}
-    <div class="card w-50 mb-3" style="margin: auto;">
-        <div class="card-body border-primary">
-            {% if task.end_time.date() < today %}
-            <div class="alert alert-warning" role="alert">
-                期限切れです！
+<main>
+    <div class="container">
+        <div class="task-add-button-container">
+            <button class="blue-button task-add-button">
+                <a class="" href="/create_task" role="button">新規作成</a>
+            </button>
+        </div>
+        <div class="tasks-wrapper">
+            {% for task in tasks %}
+            <div class="task-container">
+                <div class="task-detail">
+                    <h2 class="task-title">{{ task.title }}</h2>
+                    <p>期限：{{ task.end_time.date() }}</p>
+                    {% if task.end_time.date() < today %}
+                    <button class="orange-button expired-button">
+                        期限切れです！
+                    </button>
+                    {% endif %}
+                    
+                </div>
+                <div class="task-edit-buttons-container">
+                    <button class="gray-button"><a href="/detail/{{ task.id }}" role="button">詳細</a></button>
+                    <button class="green-button"><a href="/update/{{ task.id }}" role="button">編集</a></button>
+                    <button class="red-button"><a href="/delete/{{ task.id }}" role="button">完了</a></button>
+                </div>
             </div>
-            {% endif %}
-            <h2 class="card-title">{{ task.title }}</h2>
-            <p>期限：{{ task.end_time.date() }}</p>
-            <a class="btn btn-secondary btn-sm" href="/detail/{{ task.id }}" role="button">詳細</a>
-            <a class="btn btn-success btn-sm" href="/update/{{ task.id }}" role="button">編集</a>
-            <a class="btn btn-danger btn-sm" href="/delete/{{ task.id }}" role="button">完了</a>
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
-</div>
-
+</main>
 {% endblock content %}

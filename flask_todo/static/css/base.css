@@ -1,0 +1,82 @@
+html, 
+body {
+    margin: 0 auto;
+    color: var(--black);
+    font-family: 'BIZ UDPGothic', sans-serif;
+}
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.blue-button > a, .green-button > a, .gray-button > a, .red-button > a, .orange-button > a {
+    color: white;
+}
+
+
+
+button {
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    border-radius: 6px;
+    color: var(--white);
+}
+
+.green-button {
+    background-color: var(--green);
+}
+
+.blue-button {
+    background-color: var(--blue);
+}
+
+.red-button {
+    background-color: var(--red);
+
+}
+
+.gray-button {
+    background-color: var(--dark_gray);
+
+}
+
+.orange-button {
+    background-color: var(--orange);
+}
+
+#header {
+    background-color: var(--blue);
+    color: var(--white);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+#nav {
+    display: flex;
+    gap: 3rem;
+    margin: 0 auto;
+}
+
+.nav-links {
+    color: var(--white);
+    display: block;
+    padding: 14px;
+}
+
+.nav-links:hover {
+    color: var(--black);
+}
