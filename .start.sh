@@ -1,5 +1,8 @@
 #!/bin/sh
 
+pip install -U pip
+pip install -r ./requirements.txt
+
 export FLASK_APP=setup.py
 python -m flask db init
 python -m flask db stamp head

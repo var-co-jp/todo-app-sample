@@ -67,6 +67,7 @@ input, textarea {
 .start-message {
     text-align: center;
     margin-bottom: 4rem;
+    color: var(--red);
 }
 
 .start-login-button-container {
