@@ -85,11 +85,11 @@ input, textarea {
 .start-login-button {
     border: solid 1px var(--blue);
     color: var(--blue);
-    display: block;
     background-color: var(--blue);
 }
 
 .start-login-button > a {
+    display: block;
     color: var(--white);
 }
 
