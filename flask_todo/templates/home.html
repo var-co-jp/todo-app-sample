@@ -1,10 +1,30 @@
+{% from "_formhelpers.html" import render_field %}
 {% extends 'base.html' %}
+
+{% block title %}ホーム画面{% endblock %}
+
 {% block content %}
+<main>
     <div>
+        <!-- ログインが成功している場合 -->
         {% if current_user.is_authenticated %}
-        <p>Hello {{ current_user.username }}</p>
+        <h2>
+            ようこそ！{{ current_user.username }}さん
+        </h2>
+        <!-- ログインしていない場合 -->
         {% else %}
-        <p>ログイン or 登録をして下さい</p>
+        <h2>
+            ログイン or ユーザー登録をして下さい
+        </h2>
+        <form>
+            <button>
+                <a href="{{ url_for('todo_app.login') }}">ログイン</a>
+            </button>
+            <button>
+                <a href="{{ url_for('todo_app.register') }}">登録</a>
+            </button>
+        </form>
         {% endif %}
     </div>
+</main>
 {% endblock content %}
