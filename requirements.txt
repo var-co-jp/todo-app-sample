@@ -17,4 +17,3 @@ MarkupSafe==2.1.1
 mysqlclient==2.1.1
 SQLAlchemy==1.4.41
 Werkzeug==2.2.2
-WTForms==3.0.1
