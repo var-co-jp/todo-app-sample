@@ -8,7 +8,7 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
-# Userテーブルの定義
+# usersテーブルの定義
 class User(UserMixin, db.Model):
     # テーブル名
     __tablename__ = 'users'

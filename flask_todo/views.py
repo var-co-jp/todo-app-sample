@@ -14,31 +14,11 @@ def home():
     return render_template('home.html')
 
 
-# ログアウトするとhome.htmlに戻る
-@bp.route('/logout')
+# ToDoを表示するページを用意
+@bp.route('/user')
 @login_required
-def logout():
-    logout_user()
-    return redirect(url_for('todo_app.home'))
-
-
-# ログイン
-@bp.route('/login', methods=['GET', 'POST'])
-def login():
-    # 書き込まれた項目を取得する
-    email = request.form.get('email')
-    password = request.form.get('password')
-    # POSTリクエストの場合
-    if request.method == 'POST':
-        user = User.select_by_email(email)
-        # メールアドレスとパスワードが正しい場合
-        if user and user.validate_password(password):
-            login_user(user)
-            next = request.args.get('next')
-            if not next:
-                next = url_for('todo_app.user')
-            return redirect(next)
-    return render_template('login.html', last_access=datetime.now())
+def user():
+    return render_template('user.html')
 
 
 # ユーザー登録
@@ -102,7 +82,34 @@ def register():
                 return redirect(url_for('todo_app.login'))
     return render_template('register.html')
 
-@bp.route('/user')
+
+# ログイン
+@bp.route('/login', methods=['GET', 'POST'])
+def login():
+    # 書き込まれた項目を取得する
+    email = request.form.get('email')
+    password = request.form.get('password')
+    # POSTリクエストの場合
+    if request.method == 'POST':
+        user = User.select_by_email(email)
+        # メールアドレスとパスワードが正しい場合
+        if user and user.validate_password(password):
+            login_user(user)
+            next = request.args.get('next')
+            if not next:
+                next = url_for('todo_app.user')
+            return redirect(next)
+    return render_template('login.html', last_access=datetime.now())
+
+
+# ログアウトするとhome.htmlに戻る
+@bp.route('/logout')
 @login_required
-def user():
-    return render_template('user.html')
+def logout():
+    logout_user()
+    return redirect(url_for('todo_app.home'))
+
+
+
+
+

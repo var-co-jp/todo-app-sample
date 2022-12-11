@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}">
     {% block head %}
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-            {% block title %}
-            {% endblock title %}
-        </title>
-        <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}">
     {% endblock head %}
 </head>
 <body>
-    <div class="wrapper">
-        <div id="header">
-            <ul id="nav">
-                <li><a class="nav-links" href="{{url_for('todo_app.home')}}">ホーム</a></li>
+    <div>
+        <div>
+            <ul>
+                <li><a href="{{url_for('todo_app.home')}}">ホーム</a></li>
                 {% if current_user.is_authenticated %}
-                <li><a class="nav-links" aria-current="page" href="{{ url_for('todo_app.logout') }}">ログアウト</a></li>
+                <li><a href="{{ url_for('todo_app.logout') }}">ログアウト</a></li>
                 {% endif %}
-                <li><a class="nav-links" href="{{ url_for('todo_app.user') }}">ユーザー画面</a></li>
+                <li><a href="{{ url_for('todo_app.user') }}">ユーザー画面</a></li>
             </ul>
         </div>
         {% block content %}
