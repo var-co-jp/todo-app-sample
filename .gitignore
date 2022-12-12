@@ -1,5 +1,6 @@
 # venv環境
 /todo-app
+flask_venv*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
