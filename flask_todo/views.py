@@ -78,7 +78,7 @@ def register():
                 finally:
                     db.session.close()
                     
-                # 成功すればlogin.htmlに遷移する
+                # 成功すればtodo_app.loginに遷移する
                 return redirect(url_for('todo_app.login'))
     return render_template('register.html')
 
@@ -102,14 +102,9 @@ def login():
     return render_template('login.html', last_access=datetime.now())
 
 
-# ログアウトするとhome.htmlに戻る
+# ログアウトするとtodo_app.homeに戻る
 @bp.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('todo_app.home'))
-
-
-
-
-

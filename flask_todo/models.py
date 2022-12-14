@@ -20,7 +20,6 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(128))
     created_at = db.Column(db.DateTime, server_default=func.now(), nullable=False)
 
-    
     def __init__(self, email, username, password):
         self.email = email
         self.username = username
