@@ -1,4 +1,7 @@
-#!/bin/sh
+#!/bin/bash
+
+pip install -U pip
+pip install -r ./requirements.txt
 
 export FLASK_APP=setup.py
 python -m flask db init
