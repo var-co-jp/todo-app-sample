@@ -39,7 +39,7 @@ class User(db.Model):
 def write_db():
     # POSTリクエストの場合
     if request.method == 'POST':
-        # 書き込まれた項目を取得する
+        # 入力された項目を取得する
         username = request.form.get('username')
         
         # 取得した項目をデータベースのカラム名に紐付ける
@@ -71,8 +71,9 @@ def write_db():
 # データベースから読み込むためのロジック
 @app.route('/read_db')
 def read_db():
-    # Userテーブルのidを降順で並べて１番最初のデータ取得する
+    # Userテーブルのidを降順で並べて１番最初のデータを取得する
     users = db.session.query(User).order_by(User.id.desc()).first()
+    # user.htmlにusersデータを渡すために引数で設定している
     return render_template('user.html', users=users)
 
 if __name__ == "__main__":
