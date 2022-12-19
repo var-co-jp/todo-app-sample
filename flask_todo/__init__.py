@@ -3,14 +3,12 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 
-
 login_manager = LoginManager()
 login_manager.login_view = 'todo_app.login'
 login_manager.login_message = 'ログイン未完了です'
 
 db = SQLAlchemy()
 migrate = Migrate()
-
 
 def create_app():
     app = Flask(__name__)

@@ -19,9 +19,8 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True)
     password = db.Column(db.String(128))
     created_at = db.Column(db.DateTime, server_default=func.now(), nullable=False)
-    update_at = db.Column(db.DateTime, nullable=True)
-    last_access = db.Column(db.DateTime, onupdate=func.now(), nullable=True)
     
+    # Taskに紐付ける
     tasks = db.relationship("Task", backref="users")
     
     def __init__(self, email, username, password):
@@ -44,9 +43,15 @@ class Task(db.Model):
 
     # カラム定義
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    # タスクのタイトル
     title = db.Column(db.String(64), index=True, nullable=False)
+    # タスクの内容
     detail = db.Column(db.String(128), index=True)
+    # タスクの期限（終了日時）
     end_time = db.Column(db.DateTime, nullable=False)
+    # タスクの作成日時
     created_at = db.Column(db.DateTime, server_default=func.now(), nullable=False)
+    # タスクの更新日時
     update_at = db.Column(db.DateTime, onupdate=func.utc_timestamp(), nullable=True)
+    # usersテーブルのidを外部キーとして設定している
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
