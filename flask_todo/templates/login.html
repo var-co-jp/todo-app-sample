@@ -5,12 +5,12 @@
 
 {% block content %}
 <main>
-    <h2 class="authentication-title">ログインして下さい</h2>
+    <h2>ログインして下さい</h2>
     <form method="POST">
         <input type="text" placeholder="Email" name="email">
         <input type="password" placeholder="Password" name="password">
-        <div class="single-button-container">
-            <button class="blue-button">ログイン</button>
+        <div>
+            <button>ログイン</button>
         </div>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -24,4 +24,3 @@
     </form>
 </main>    
 {% endblock content %}
-    

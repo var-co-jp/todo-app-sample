@@ -130,6 +130,7 @@ def create_task():
         # どこかに空欄がある場合
         if title == '' or detail =='' or end_time == '':
             flash('空のフォームがあります')
+		# 全て正しく入力された場合
         else:
             # 取得した項目をデータベースのカラム名に紐付ける
             create_task = Task(

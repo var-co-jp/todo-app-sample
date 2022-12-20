@@ -5,25 +5,25 @@
 
 {% block content %}
 <main>
-    <div class="task-detail-container">
-        <h2 class="task-detail-title">
+    <div>
+        <h2>
             {{ task.title }}
         </h2>
         <p>
             {{ task.detail }}
         </p>
-        <div class="task-detail-expiry">
+        <div>
             <p>
                 期限：{{ task.end_time.date() }}
             </p>
             {% if task.end_time.date() < today %}
-            <button class="orange-button expired-button">
+            <button>
                 期限切れです！
             </button>
             {% endif %}
         </div>
-        <div class="single-button-container">
-            <button class="blue-button">
+        <div>
+            <button>
                 <a href="/user">戻る</a>
             </button>
         </div>

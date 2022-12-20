@@ -7,19 +7,19 @@
 {% block content %}
 <main>
     <form method="POST">
-        <div class="input-container">
+        <div>
             <input type="text" placeholder="タスクのタイトル" name="title">
         </div>
-        <div class="input-container">
-            <textarea name="detail" placeholder="タスクの詳細" id="" rows="5"></textarea>
+        <div>
+            <textarea name="detail" placeholder="タスクの詳細" rows="5"></textarea>
         </div>
-        <div class="input-container">
+        <div>
             <label for="due">終了予定日</label>
             <input type="date" name="end_time" required>
         </div>
-        <div class="button-container">
-            <button type="submit" class="green-button">作成</button>
-            <button class="outline-button"><a href="/user" role="button">戻る</a></button>
+        <div>
+            <button type="submit">作成</button>
+            <button><a href="/user" role="button">戻る</a></button>
         </div>
     </form>
 </main>

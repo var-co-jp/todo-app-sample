@@ -1,4 +1,3 @@
-@import "color.css";
-@import "base.css";
-@import "main.css";
-@import "task.css";
+.flash {
+    color: red;
+}

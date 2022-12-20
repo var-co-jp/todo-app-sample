@@ -5,14 +5,14 @@
 
 {% block content %}
 <main>
-    <h2 class="authentication-title">登録して下さい</h2>
+    <h2>登録して下さい</h2>
     <form method="post">
         <input type="text" placeholder="Name" name="name">
         <input type="text" placeholder="Email" name="email">
         <input type="password" placeholder="Password" name="password1">
         <input type="password" placeholder="Password Confirmation" name="password2">
-        <div class="single-button-container">
-            <button class="blue-button">登録</button>
+        <div>
+            <button>登録</button>
         </div>
         {% with messages = get_flashed_messages() %}
           {% if messages %}
