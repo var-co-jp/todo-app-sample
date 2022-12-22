@@ -120,28 +120,27 @@ font: inherit;
 
 @media (prefers-reduced-motion: reduce) {
 
-html:focus-within {
+    html:focus-within {
 
-scroll-behavior: auto;
+    scroll-behavior: auto;
 
-}
+    }
 
 
+    *,
 
-*,
+    *::before,
 
-*::before,
+    *::after {
 
-*::after {
+    animation-duration: 0.01ms !important;
 
-animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
 
-animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
 
-transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
 
-scroll-behavior: auto !important;
-
-}
+    }
 
 }

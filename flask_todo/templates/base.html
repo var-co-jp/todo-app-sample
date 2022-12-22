@@ -25,9 +25,6 @@
                 <li><a class="nav-links" href="{{url_for('todo_app.home')}}">ホーム</a></li>
                 {% if current_user.is_authenticated %}
                 <li><a class="nav-links" aria-current="page" href="{{ url_for('todo_app.logout') }}">ログアウト</a></li>
-                {% else %}
-                <!-- <li><a class="nav-links" href="{{ url_for('todo_app.login') }}">ログイン</a></li>
-                <li><a class="nav-links" href="{{ url_for('todo_app.register') }}">登録</a></li> -->
                 {% endif %}
                 <li><a class="nav-links" href="{{ url_for('todo_app.user') }}">ユーザー画面</a></li>
             </ul>
